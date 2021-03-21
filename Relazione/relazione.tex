@@ -1,9 +1,21 @@
 \documentclass[a4paper,12pt]{article}
 \usepackage [utf8]{inputenc}
 \usepackage [italian]{babel}
+\usepackage{graphicx}
+%\usepackage{grffile}
 \usepackage{listings}
 \usepackage{color}
 \usepackage[hidelinks]{hyperref}
+\usepackage{calc}
+
+\addtolength{\oddsidemargin}{-30pt}
+\addtolength{\textwidth}{60pt}
+\addtolength{\voffset}{-60pt}
+\addtolength{\textheight}{100pt}
+
+
+\graphicspath{ {../Schema concettuale} {../Schema logico relazionale} {../Piani di accesso} }
+\lstset{inputpath=../Sorgenti SQL/}
 
 \definecolor{codegreen}{rgb}{0,0.6,0}
 \definecolor{codegray}{rgb}{0.5,0.5,0.5}
@@ -40,7 +52,7 @@
 
 %%%%%%%%%%%%%%%%%%%%%%%  FRONTESPIZIO %%%%%%%%%%%%%%%%%%%%%%%
 
-\title { \vspace{-4.0cm}{\small Università di Pisa\\Dipartimento di Informatica\\Corso di Laurea in Informatica\\[0.5cm]Corso di Basi di Dati (244AA), prof. Giorgio Ghelli\\[0.7cm]}Progetto ``Studio professionale fatture"\\Relazione finale }
+\title { \vspace{-1.0cm}{\small Università di Pisa\\Dipartimento di Informatica\\Corso di Laurea in Informatica\\[0.5cm]Corso di Basi di Dati (244AA), prof. Giorgio Ghelli\\[0.7cm]}Progetto ``Studio professionale fatture"\\Relazione finale }
 \author { Candidato:\\Alessandro Antonelli\\(matricola 507264, corso A) }
 \date { Consegna: 24 marzo 2021\\Appello straordinario marzo 2021\\A.A. 2019/2020 }
 
@@ -48,6 +60,8 @@
  \maketitle
  
  \tableofcontents
+
+\listoffigures
 
 \lstlistoflistings
 
@@ -57,9 +71,21 @@
 
  \section{ Descrizione del dominio }
 
-Bla
+Bla bla bla
 
  \section{ Schema concettuale }
+
+\begin{figure}[h]
+    \centering
+    \caption{Schema concettuale a oggetti}
+    \centerline{
+	 \frame{
+      \includegraphics[width=\paperwidth-1cm]{ Schema concettuale a oggetti.png }
+    } }
+    \label{GraficoConcettuale}
+\end{figure}
+
+%nel testo, per indicare il numero di figura, si può usare \ref{} scrivendo tra le graffe il contenuto di "label"
 
  \subsection{ Vincoli }
 
@@ -90,11 +116,7 @@ Bla
  \subsection{ Uso di select annidata con quantificazione universale }
  \subsection{ Uso di subquery di confronto quantificato usando una subquery }
 
-\begin{lstlisting}[caption=esempio]
-SELECT attr
-FROM tab1 JOIN tab2
-WHERE tab1.x = tab2.y
-\end{lstlisting}
+\lstinputlisting[caption=esempio]{esempio.sql}
 
  \section{ Piani di accesso }
 
