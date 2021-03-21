@@ -72,7 +72,16 @@
 
  \section{ Descrizione del dominio }
 
-Bla bla bla
+Le classi individuate sono  7:
+\begin{enumerate}
+\item \textbf{Clienti}: contiene le informazioni comuni a tutti i clienti dello studio professionale; un cliente, può essere titolare di più pratiche, può effettuare più pagamenti ed essere intestatario di più fatture
+\item \textbf{Persone}: rappresenta le persone sia come clienti dello studio professionale che, come persone, facenti parti di  una organizzazione. Estende la classe “Clienti”. Se rappresenta una persona che fa parte di una organizzazione può avere un solo ruolo all’interno della stessa organizzazione, ma più di un ruolo per organizzazioni diverse.
+\item \textbf{Organizzazioni}: secondo tipo di cliente dello studio professionale. Estende la classe “Clienti”. Può emettere più fatture.
+\item \textbf{RuoliAziendali}: fornisce il ruolo (la qualifica) per ogni persona che fa parte di una organizzazione.
+\item \textbf{Pagamenti}: fornisce i vari metodi di pagamenti utilizzabili da un cliente  e l’ammontare del pagamento. I pagamenti possono essere effettuati da più clienti e, ogni pagamento può riferirsi ad una sola fattura.
+\item \textbf{Fatture}: rappresenta le fatture emesse da una organizzazione e l’importo totale per ogni fattura. Le fatture possono essere emesse solo  dalle organizzazioni.
+\item \textbf{Pratiche}: rappresenta le pratiche associate ai clienti
+\end{enumerate}
 
  \section{ Schema concettuale }
 
@@ -145,11 +154,11 @@ Bla bla bla
 
 \item \textbf{Pagamenti} (\underline{IDpagamento}, IDfattura*, IDpersona*, IDorganizzazione*, Modalità, CifraPagata)
 
+\item \textbf{RuoliAziendali} (\underline{IDruolo}, IDorganizzazione*, Qualifica)
+
 \item \textbf{PersoneRuoliAziendali} (\underline{IDpersona*}, \underline{IDruolo*})
 
 \item \textbf{PraticheRuoliAziendali} (\underline{IDpratica*}, \underline{IDruolo*})
-
-\item \textbf{RuoliAziendali} (\underline{IDruolo}, IDorganizzazione*, Qualifica)
 \end{itemize}
 
 
