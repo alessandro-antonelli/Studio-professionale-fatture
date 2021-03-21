@@ -7,9 +7,10 @@
 \usepackage{color}
 \usepackage[hidelinks]{hyperref}
 \usepackage{calc}
+\usepackage{caption}
 
-\addtolength{\oddsidemargin}{-30pt}
-\addtolength{\textwidth}{60pt}
+\addtolength{\oddsidemargin}{-40pt}
+\addtolength{\textwidth}{80pt}
 \addtolength{\voffset}{-60pt}
 \addtolength{\textheight}{100pt}
 
@@ -53,8 +54,8 @@
 %%%%%%%%%%%%%%%%%%%%%%%  FRONTESPIZIO %%%%%%%%%%%%%%%%%%%%%%%
 
 \title { \vspace{-1.0cm}{\small Università di Pisa\\Dipartimento di Informatica\\Corso di Laurea in Informatica\\[0.5cm]Corso di Basi di Dati (244AA), prof. Giorgio Ghelli\\[0.7cm]}Progetto ``Studio professionale fatture"\\Relazione finale }
-\author { Candidato:\\Alessandro Antonelli\\(matricola 507264, corso A) }
-\date { Consegna: 24 marzo 2021\\Appello straordinario marzo 2021\\A.A. 2019/2020 }
+\author { Candidati:\\Alessandro Antonelli\\(matricola 507264, corso A)\\Tony Agosta\\(matricola 544090, corso A)}
+\date { Consegna: 25 marzo 2021\\Appello straordinario marzo 2021\\A.A. 2019/2020 }
 
 \begin {document}
  \maketitle
@@ -75,29 +76,82 @@ Bla bla bla
 
  \section{ Schema concettuale }
 
-\begin{figure}[h]
-    \centering
-    \caption{Schema concettuale a oggetti}
-    \centerline{
-	 \frame{
-      \includegraphics[width=\paperwidth-2cm]{ Schema concettuale a oggetti.png }
-    } }
-    \label{GraficoConcettuale}
-\end{figure}
-
-%nel testo, per indicare il numero di figura, si può usare \ref{} scrivendo tra le graffe il contenuto di "label"
+\begin{minipage}{\textwidth}
+\begin{center}
+\centering 
+ \captionof{figure}{Schema concettuale a oggetti}
+\centerline{
+%\frame{
+\includegraphics[width=\textwidth]{ Schema concettuale a oggetti.png }
+}
+\end{center}
+\end{minipage}
 
  \subsection{ Vincoli }
 
- \subsection{ Vincoli intrarelazionali }
+\subsection{ Vincoli intrarelazionali }
 
- \subsection{ Vincoli interrelazionali }
+\begin{itemize}
+\item Tutti gli attributi (comprese le chiavi esterne) hanno il vincolo NOT NULL.
+
+\item Il \textit{Nome} e il \textit{Cognome} di una \textit{Persona} deve essere lungo almeno 1 carattere.
+
+\item Il \textit{CodiceFiscale} di una \textit{Persona} deve essere lungo esattamente 16 caratteri.
+
+\item L'\textit{Importo} di una \textit{Fattura} deve essere $>$ 0.
+
+\item La \textit{CifraPagata} di un \textit{Pagamento} deve essere $>$ 0.
+
+\item La \textit{PartitaIVA} di un'\textit{Organizzazione} deve essere di esattamente 11 caratteri.
+
+\item Il \textit{RecapitoTelefonico} di un \textit{Cliente} non può essere lungo meno di 9 caratteri.
+
+\item La \textit{Qualifica} di un \textit{RuoloAziendale} deve essere presente ... ?
+\end{itemize}
+
+\subsection{ Vincoli interrelazionali }
+
+\begin{itemize}
+\item La \textit{CifraPagata} di un \textit{Pagamento} deve essere $\leq$ dell'\textit{Importo} della \textit{Fattura} a cui si riferisce.
+
+\item Se il titolare di una \textit{Pratica} è un cliente che è una \textit{Organizzazione}, allora la \textit{Pratica} deve essere seguita da almeno un \textit{RuoloAziendale}.
+\end{itemize}
 
  \section{ Schema logico relazionale }
 
  \subsection{ Formato grafico }
 
+\begin{minipage}{\textwidth}
+\begin{center}
+\centering 
+ \captionof{figure}{Schema logico relazionale}
+\centerline{
+%\frame{
+\includegraphics[width=\textwidth -4cm]{ Schema logico relazionale.png }
+}
+\end{center}
+\end{minipage}
+
  \subsection{ Formato testuale }
+
+\begin{itemize}
+\item \textbf{Pratiche} (\underline{IDpratica}, IDpersona*, IDorganizzazione*)
+
+\item \textbf{Fatture} (\underline{IDfattura}, IDpratica*, IDorganizzazioneEmittente*, IDpersonaIntestataria*, IDorganizzazioneIntestataria*, Importo)
+
+\item \textbf{Persone} (\underline{IDpersona}, Denominazione, Indirizzo, RecapitoTelefonico, Nome, Cognome, CodiceFiscale)
+
+\item \textbf{Organizzazioni} (\underline{IDorganizzazione}, Denominazione, Indirizzo, RecapitoTelefonico, PartitaIVA)
+
+\item \textbf{Pagamenti} (\underline{IDpagamento}, IDfattura*, IDpersona*, IDorganizzazione*, Modalità, CifraPagata)
+
+\item \textbf{PersoneRuoliAziendali} (\underline{IDpersona*}, \underline{IDruolo*})
+
+\item \textbf{PraticheRuoliAziendali} (\underline{IDpratica*}, \underline{IDruolo*})
+
+\item \textbf{RuoliAziendali} (\underline{IDruolo}, IDorganizzazione*, Qualifica)
+\end{itemize}
+
 
  \subsection{ Dipendenze funzionali }
 
