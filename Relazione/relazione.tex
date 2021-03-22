@@ -40,7 +40,7 @@
     numbersep=10pt,                  
     showspaces=false,
     showstringspaces=false,
-    showtabs=true,
+    showtabs=false,
     tabsize=4
 }
 \lstset{style=mystyle}
@@ -72,15 +72,25 @@
 
  \section{ Descrizione del dominio }
 
+Uno studio professionale, inteso come studio di un commercialista, si occupa di gestire le pratiche in corso intestate ai suoi clienti, i quali presentano fatture di cui devono essere aiutati a pagare le tasse.
+
+I clienti dello studio sono suddivisi in due sottoclassi partizione, Organizzazioni e Persone; le Organizzazioni possono essere titolari di 0, 1, o più pratiche, mentre tra le Persone, alcune sono titolari di 1 o più pratiche, altre non sono titolari di pratiche e ne seguono 1 o più per conto di una o più organizzazioni all’interno delle quali ricoprono un ruolo, tenendo conto che un ruolo può essere ricoperto da una o più persone, che un ruolo corrisponde a una e una sola organizzazione e che a una organizzazione corrispondono 1 o più ruoli.
+
+Per ogni cliente che si rivolge allo studio viene aperta una pratica, a cui corrisponde un insieme di fatture. Questo vuol dire che una pratica, per esistere, deve essere intestata a un cliente ma un cliente può non avere pratiche in corso intestate in quel momento, in quanto alcuni clienti non sono titolari di pratiche ma possono seguirne una per conto di un’organizzazione per cui lavorano. Inoltre, ad ogni pratica possono essere associate più fatture e viceversa una fattura può essere relativa ad una sola pratica.
+
+Una fattura può essere pagata con modalità di pagamenti differenti e a rate, questo vuol dire che un pagamento si può riferire ad una sola  fattura, ma una fattura può essere pagata, fino a raggiungere l’importo totale della fattura, da più pagamenti. A tal fine un cliente può effettuare più pagamenti, e un pagamento può essere effettuato da un solo cliente.
+
+Ogni fattura è intestata a un solo cliente, e un cliente può avere 0, 1, o più fatture intestate. Un’organizzazione emette una o più fatture, e una fattura viene emessa sempre da una sola organizzazione.
+
 Le classi individuate sono  7:
 \begin{enumerate}
-\item \textbf{Clienti}: contiene le informazioni comuni a tutti i clienti dello studio professionale; un cliente, può essere titolare di più pratiche, può effettuare più pagamenti ed essere intestatario di più fatture
-\item \textbf{Persone}: rappresenta le persone sia come clienti dello studio professionale che, come persone, facenti parti di  una organizzazione. Estende la classe “Clienti”. Se rappresenta una persona che fa parte di una organizzazione può avere un solo ruolo all’interno della stessa organizzazione, ma più di un ruolo per organizzazioni diverse.
-\item \textbf{Organizzazioni}: secondo tipo di cliente dello studio professionale. Estende la classe “Clienti”. Può emettere più fatture.
-\item \textbf{RuoliAziendali}: fornisce il ruolo (la qualifica) per ogni persona che fa parte di una organizzazione.
-\item \textbf{Pagamenti}: fornisce i vari metodi di pagamenti utilizzabili da un cliente  e l’ammontare del pagamento. I pagamenti possono essere effettuati da più clienti e, ogni pagamento può riferirsi ad una sola fattura.
-\item \textbf{Fatture}: rappresenta le fatture emesse da una organizzazione e l’importo totale per ogni fattura. Le fatture possono essere emesse solo  dalle organizzazioni.
-\item \textbf{Pratiche}: rappresenta le pratiche associate ai clienti
+\item \textbf{Clienti}: rappresenta l’insieme di tutti i clienti dello studio professionale con le loro informazioni comuni.
+\item \textbf{Persone}: rappresenta l’insieme delle persone sia come clienti dello studio professionale che, come persone, facenti parti di  una organizzazione. Specializza la classe “Clienti”.
+\item \textbf{Organizzazioni}: rappresenta l’insieme delle organizzazioni clienti dello studio professionale. Specializza la classe “Clienti”.
+\item \textbf{RuoliAziendali}:rappresenta l’insieme dei ruoli svolti da ogni persona che fa parte di una organizzazione.
+\item \textbf{Pagamenti}: rappresenta l’insieme dei pagamenti con tutte le relative informazioni.
+\item \textbf{Fatture}: rappresenta l’insieme delle fatture, con tutte le relative informazioni.
+\item \textbf{Pratiche}: rappresenta l’insieme delle pratiche associate ai clienti.
 \end{enumerate}
 
  \section{ Schema concettuale }
@@ -131,6 +141,11 @@ Le classi individuate sono  7:
  \subsection{ Formato grafico }
 
 \begin{minipage}{\textwidth}
+\textbf{Legenda}:
+\includegraphics[width=0.5cm]{ Legenda chiave primaria.png } chiave primaria\hspace{1cm}
+\includegraphics[width=0.5cm]{ Legenda chiave esterna.png } chiave esterna\hspace{1cm}
+\includegraphics[width=0.5cm]{ Legenda attributo.png } attributo semplice
+
 \begin{center}
 \centering 
  \captionof{figure}{Schema logico relazionale}
@@ -146,13 +161,13 @@ Le classi individuate sono  7:
 \begin{itemize}
 \item \textbf{Pratiche} (\underline{IDpratica}, IDpersona*, IDorganizzazione*)
 
-\item \textbf{Fatture} (\underline{IDfattura}, IDpratica*, IDorganizzazioneEmittente*, IDpersonaIntestataria*, IDorganizzazioneIntestataria*, Importo)
+\item \textbf{Fatture} (\underline{IDfattura}, IDpratica*, IDorganizzazioneEmittente*, IDpersonaIntestataria*, IDorganizzazioneIntestataria*, Importo, DataEmissione)
 
 \item \textbf{Persone} (\underline{IDpersona}, Denominazione, Indirizzo, RecapitoTelefonico, Nome, Cognome, CodiceFiscale)
 
 \item \textbf{Organizzazioni} (\underline{IDorganizzazione}, Denominazione, Indirizzo, RecapitoTelefonico, PartitaIVA)
 
-\item \textbf{Pagamenti} (\underline{IDpagamento}, IDfattura*, IDpersona*, IDorganizzazione*, Modalità, CifraPagata)
+\item \textbf{Pagamenti} (\underline{IDpagamento}, IDfattura*, IDpersona*, IDorganizzazione*, Modalità, CifraPagata, DataPagamento)
 
 \item \textbf{RuoliAziendali} (\underline{IDruolo}, IDorganizzazione*, Qualifica)
 
@@ -164,22 +179,93 @@ Le classi individuate sono  7:
 
  \subsection{ Dipendenze funzionali }
 
- \subsubsection{ Relazioni A, B, C }
+Tutte le relazioni rispettano la forma normale di Boyce-Codd (BCNF), di seguito si riportano le dipendenze funzionali:
 
- \subsubsection{ Relazioni C, D, E }
+\begin{itemize}
+\item Pratiche\\È in BCNF perché IDpratica è chiave.
+\begin{itemize}
+\item IDpratica $\rightarrow$ IDpersona, IDorganizzazione
+\end{itemize}
 
- \subsubsection{ Relazioni X }
+\item Organizzazioni\\È in BCNF perché IDorganizzazione è chiave, e PartitaIVA e RecapitoTelefonico, identificando una singola organizzazione, sono chiavi.
+\begin{itemize}
+\item IDorganizzazione $\rightarrow$ Denominazione, Indirizzo, RecapitoTelefonico, PartitaIVA
+\item PartitaIVA $\rightarrow$ Denominazione, Indirizzo, RecapitoTelefonico, IDorganizzazione
+\item RecapitoTelefonico $\rightarrow$ Denominazione, Indirizzo, PartitaIVA, IDorganizzazione
+\end{itemize}
+
+\item Persone\\È in BCNF perché IDpersona è chiave, e CodiceFiscale e RecapitoTelefonico, identificando una singola persona, sono chiavi.
+\begin{itemize}
+\item IDpersona $\rightarrow$ Denominazione, Indirizzo, RecapitoTelefonico, Nome, Cognome, CodiceFiscale
+\item CodiceFiscale $\rightarrow$ Denominazione, Indirizzo, RecapitoTelefonico, Nome, Cognome, IDpersona
+\item RecapitoTelefonico $\rightarrow$ Denominazione, Indirizzo, Nome, Cognome, CodiceFiscale, IDpersona
+\end{itemize}
+
+\item PersoneRuoliAziendali è in BCNF perché non ha dipendenze non banali
+
+\item PraticheRuoliAziendali è in BCNF perché non ha dipendenze non banali
+
+\item RuoliAziendali\\È in BCNF perché IDruolo è chiave
+\begin{itemize}
+\item IDruolo $\rightarrow$ Qualifica, IDorganizzazione
+\end{itemize}
+
+\item Fatture\\È in BCNF perché IDfattura è chiave L'ALTRA È DA CONTROLLAREEEEEEEEEEEEEEEE
+
+\begin{itemize}
+\item IDfattura $\rightarrow$ Importo, IDpratica, IDorganizzazioneEmittente, IDpersonaIntestataria, IDorganizzazioneIntestataria, DataEmissione
+
+\item IDpratica $\rightarrow$ IDpersonaIntestataria, IDorganizzazioneIntestataria RICONTROLLAREEEEEEEEEEEEEEEEEEEEEEEEEEE
+\end{itemize}
+
+\item Pagamenti\\È in BCNF perché IDpagamento è chiave
+
+\begin{itemize}
+\item IDpagamento $\rightarrow$ Modalità, CifraPagata, IDfattura, IDpersona, IDorganizzazione, DataPagamento
+\end{itemize}
+
+\end{itemize}
 
  \section{ Interrogazioni }
 
+
  \subsection{ Uso di proiezione, join e restrizione }
+Selezionare tutte le persone intestatarie di fatture i cui importi sono $>$ 100:
+\lstinputlisting[caption=Query 1]{1.sql}
+
+
  \subsection{ Uso di group by con having, where e sort }
+
+Selezionare le modalità di pagamenti in cui CifraPagata $>$ 10, con il totale per ogni pagamento $<$10000 e ordinate in base al totale:
+
+(il senso vorrebbe essere quello di raggruppare i vari pagamenti effettuati in base alle modalità utilizzate e il cui importo superi 10. Esempio: con il bonifico sono state pagate un numero di fatture per un totale di 10000, e poi ordinarle con questo totale)
+
+%\lstinputlisting[caption=Query 2]{2.sql}
+
+
  \subsection{ Uso di join, group by con having e where }
+
+Selezionare il codice fiscale di persone intestatarie di almeno 3 fatture il cui importo è $\geq$ 1000:
+
+\lstinputlisting[caption=Query 3]{3.sql}
+
  \subsection{ Uso di select annidata con quantificazione esistenziale }
+
+Selezionare le organizzazioni che hanno emesso almeno una fattura con un importo $>$ 100:
+
+\lstinputlisting[caption=Query 4]{4.sql}
+
  \subsection{ Uso di select annidata con quantificazione universale }
+
+Selezionare le fatture che non sono state pagate in contanti:
+
+%\lstinputlisting[caption=Query 5]{5.sql}
+
  \subsection{ Uso di subquery di confronto quantificato usando una subquery }
 
-\lstinputlisting[caption=esempio]{esempio.sql}
+Selezionare i pagamenti effettuati tramite bonifico il cui importo è maggiore del pagamento massimo effettuato tramite assegno:
+
+%\lstinputlisting[caption=Query 6]{6.sql}
 
  \section{ Piani di accesso }
 
