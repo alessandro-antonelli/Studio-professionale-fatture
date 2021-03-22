@@ -230,7 +230,7 @@ Tutte le relazioni rispettano la forma normale di Boyce-Codd (BCNF), di seguito 
 
 
  \subsection{ Uso di proiezione, join e restrizione }
-Selezionare tutte le persone intestatarie di fatture i cui importi sono $> 100$:
+Stampa le persone intestatarie di fatture i cui importi sono $> 100$:
 
 \begin{minipage}{\textwidth}
 \lstinputlisting[caption=Query 1]{1.sql}
@@ -239,7 +239,7 @@ Selezionare tutte le persone intestatarie di fatture i cui importi sono $> 100$:
 
  \subsection{ Uso di group by con having, where e sort }
 
-Selezionare le modalità di pagamenti in cui CifraPagata $> 10$, con il totale per ogni pagamento $< 10000$ e ordinate in base al totale:
+Stampa le modalità di pagamenti in cui CifraPagata $> 10$, con il totale per ogni pagamento $< 10000$ e ordinate in base al totale:
 
 (il senso vorrebbe essere quello di raggruppare i vari pagamenti effettuati in base alle modalità utilizzate e il cui importo superi 10. Esempio: con il bonifico sono state pagate un numero di fatture per un totale di 10000, e poi ordinarle con questo totale)
 
@@ -250,7 +250,7 @@ Selezionare le modalità di pagamenti in cui CifraPagata $> 10$, con il totale p
 
  \subsection{ Uso di join, group by con having e where }
 
-Selezionare il codice fiscale di persone intestatarie di almeno 3 fatture il cui importo è $\geq 1000$:
+Stampa il codice fiscale delle persone intestatarie di più di 3 fatture il cui importo è $> 1000$:
 
 \begin{minipage}{\textwidth}
 \lstinputlisting[caption=Query 3]{3.sql}
@@ -258,7 +258,7 @@ Selezionare il codice fiscale di persone intestatarie di almeno 3 fatture il cui
 
  \subsection{ Uso di select annidata con quantificazione esistenziale }
 
-Selezionare le organizzazioni che hanno emesso almeno una fattura con un importo $> 100$:
+Stampa le organizzazioni che hanno emesso almeno una fattura con un importo $> 100$:
 
 \begin{minipage}{\textwidth}
 \lstinputlisting[caption=Query 4]{4.sql}
@@ -266,7 +266,7 @@ Selezionare le organizzazioni che hanno emesso almeno una fattura con un importo
 
  \subsection{ Uso di select annidata con quantificazione universale }
 
-Selezionare le fatture che non sono state pagate in contanti:
+Stampa le fatture che non sono state pagate in contanti:
 
 \begin{minipage}{\textwidth}
 \lstinputlisting[caption=Query 5]{5.sql}
@@ -274,7 +274,7 @@ Selezionare le fatture che non sono state pagate in contanti:
 
  \subsection{ Uso di subquery di confronto quantificato usando una subquery }
 
-Selezionare i pagamenti effettuati tramite bonifico il cui importo è maggiore del pagamento massimo effettuato tramite assegno:
+Stampa i pagamenti effettuati tramite bonifico il cui importo è maggiore del pagamento massimo effettuato tramite assegno:
 
 \begin{minipage}{\textwidth}
 \lstinputlisting[caption=Query 6]{6.sql}
