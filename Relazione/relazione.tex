@@ -239,9 +239,7 @@ Stampa le persone intestatarie di fatture i cui importi sono $> 100$:
 
  \subsection{ Uso di group by con having, where e sort }
 
-Stampa le modalità di pagamenti in cui CifraPagata $> 10$, con il totale per ogni pagamento $< 10000$ e ordinate in base al totale:
-
-(il senso vorrebbe essere quello di raggruppare i vari pagamenti effettuati in base alle modalità utilizzate e il cui importo superi 10. Esempio: con il bonifico sono state pagate un numero di fatture per un totale di 10000, e poi ordinarle con questo totale)
+Stampa il totale per ogni modalità di pagamento dato dai pagamenti in cui CifraPagata $> 10$ e $< 10000$, e ordinate in base al totale:
 
 \begin{minipage}{\textwidth}
 \lstinputlisting[caption=Query 2]{2.sql}
