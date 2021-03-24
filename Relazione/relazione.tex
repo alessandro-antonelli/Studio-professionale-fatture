@@ -113,8 +113,6 @@ Le classi individuate sono  7:
 \begin{itemize}
 \item Tutti gli attributi (comprese le chiavi esterne) hanno il vincolo NOT NULL.
 
-\item Il \textit{Nome} e il \textit{Cognome} di una \textit{Persona} deve essere lungo almeno 1 carattere.
-
 \item Il \textit{CodiceFiscale} di una \textit{Persona} deve essere lungo esattamente 16 caratteri.
 
 \item L'\textit{Importo} di una \textit{Fattura} deve essere $> 0$.
@@ -124,8 +122,6 @@ Le classi individuate sono  7:
 \item La \textit{PartitaIVA} di un'\textit{Organizzazione} deve essere di esattamente 11 caratteri.
 
 \item Il \textit{RecapitoTelefonico} di un \textit{Cliente} non può essere lungo meno di 9 caratteri.
-
-\item La \textit{Qualifica} di un \textit{RuoloAziendale} deve essere presente ... ?
 \end{itemize}
 
 \subsection{ Vincoli interrelazionali }
@@ -210,12 +206,12 @@ Tutte le relazioni rispettano la forma normale di Boyce-Codd (BCNF), di seguito 
 \item IDruolo $\rightarrow$ Qualifica, IDorganizzazione
 \end{itemize}
 
-\item Fatture\\È in BCNF perché IDfattura è chiave L'ALTRA È DA CONTROLLAREEEEEEEEEEEEEEEE
+\item Fatture\\È in BCNF perché IDfattura è chiave e perché a una pratica corrisponde un unico cliente (persona o organizzazione), come verificabile nello schema concettuale.
 
 \begin{itemize}
 \item IDfattura $\rightarrow$ Importo, IDpratica, IDorganizzazioneEmittente, IDpersonaIntestataria, IDorganizzazioneIntestataria, DataEmissione
 
-\item IDpratica $\rightarrow$ IDpersonaIntestataria, IDorganizzazioneIntestataria RICONTROLLAREEEEEEEEEEEEEEEEEEEEEEEEEEE
+\item IDpratica $\rightarrow$ IDpersonaIntestataria, IDorganizzazioneIntestataria
 \end{itemize}
 
 \item Pagamenti\\È in BCNF perché IDpagamento è chiave
@@ -372,7 +368,7 @@ Stampa i pagamenti effettuati tramite bonifico il cui importo è maggiore del pa
  \captionof{figure}{Piano di accesso fisico della query 1 con indici}
 \centerline{
 %\frame{
-%\includegraphics[height=\textheight / 3]{ Albero fisico 1 indici.png }
+\includegraphics[height=\textheight / 3]{ Albero fisico 1 indici.png }
 }
 \end{center}
 \end{minipage}
@@ -385,7 +381,7 @@ Stampa i pagamenti effettuati tramite bonifico il cui importo è maggiore del pa
  \captionof{figure}{Piano di accesso fisico della query 2 con indici}
 \centerline{
 %\frame{
-%\includegraphics[height=\textheight / 3]{ Albero fisico 2 indici.png }
+\includegraphics[height=\textheight / 3]{ Albero fisico 2 indici.png }
 }
 \end{center}
 \end{minipage}
@@ -398,7 +394,7 @@ Stampa i pagamenti effettuati tramite bonifico il cui importo è maggiore del pa
  \captionof{figure}{Piano di accesso fisico della query 3 con indici}
 \centerline{
 %\frame{
-%\includegraphics[height=\textheight / 3]{ Albero fisico 3 indici.png }
+\includegraphics[height=\textheight / 3]{ Albero fisico 3 indici.png }
 }
 \end{center}
 \end{minipage}
