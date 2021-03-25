@@ -78,11 +78,13 @@ Uno studio professionale, inteso come studio di un commercialista, si occupa di 
 
 I clienti dello studio sono suddivisi in due sottoclassi partizione, Organizzazioni e Persone; le Organizzazioni possono essere titolari di 0, 1, o più pratiche, mentre tra le Persone, alcune sono titolari di 1 o più pratiche, altre non sono titolari di pratiche e ne seguono 1 o più per conto di una o più organizzazioni all’interno delle quali ricoprono un ruolo, tenendo conto che un ruolo può essere ricoperto da una o più persone, che un ruolo corrisponde a una e una sola organizzazione e che a una organizzazione corrispondono 1 o più ruoli.
 
-Per ogni cliente che si rivolge allo studio viene aperta una pratica, a cui corrisponde un insieme di fatture. Questo vuol dire che una pratica, per esistere, deve essere intestata a un cliente ma un cliente può non avere pratiche in corso intestate in quel momento, in quanto alcuni clienti non sono titolari di pratiche ma possono seguirne una per conto di un’organizzazione per cui lavorano. Inoltre, ad ogni pratica possono essere associate più fatture e viceversa una fattura può essere relativa ad una sola pratica.
+Per ogni cliente che si rivolge allo studio viene aperta una pratica, a cui corrisponde un insieme di fatture. Questo vuol dire che una pratica, per esistere, deve essere intestata a un cliente ma un cliente può non avere pratiche in corso intestate in quel momento, in quanto alcuni clienti non sono titolari di pratiche ma possono seguirne una per conto di un’organizzazione per cui lavorano.
+
+Ad ogni pratica possono essere associate zero o più fatture e viceversa una fattura può essere relativa ad una e una sola pratica. Inoltre si è supposto che lo studio lavori soltanto su fatture intestate al cliente che è titolare della pratica (come avviene in un normale studio di commercialista), pertanto si è inteso che l'intestatario della fattura coincide sempre con il titolare della pratica a cui la fattura è relativa.
+
+Ogni fattura è intestata a uno e un solo cliente, e un cliente può avere 0, 1, o più fatture intestate. Un’organizzazione può emettere zero, una o più fatture, e una fattura viene emessa sempre da una e una sola organizzazione.
 
 Una fattura può essere pagata con modalità di pagamenti differenti e a rate, questo vuol dire che un pagamento si può riferire ad una sola  fattura, ma una fattura può essere pagata, fino a raggiungere l’importo totale della fattura, da più pagamenti. A tal fine un cliente può effettuare più pagamenti, e un pagamento può essere effettuato da un solo cliente.
-
-Ogni fattura è intestata a un solo cliente, e un cliente può avere 0, 1, o più fatture intestate. Un’organizzazione emette una o più fatture, e una fattura viene emessa sempre da una sola organizzazione.
 
 Le classi individuate sono  7:
 \begin{enumerate}
@@ -157,7 +159,7 @@ Le classi individuate sono  7:
 \begin{itemize}
 \item \textbf{Pratiche} (\underline{IDpratica}, IDpersona*, IDorganizzazione*)
 
-\item \textbf{Fatture} (\underline{IDfattura}, IDpratica*, IDorganizzazioneEmittente*, IDpersonaIntestataria*, IDorganizzazioneIntestataria*, Importo, DataEmissione)
+\item \textbf{Fatture} (\underline{IDfattura}, IDpratica*, IDorganizzazioneEmittente*, Importo, DataEmissione)
 
 \item \textbf{Persone} (\underline{IDpersona}, Denominazione, Indirizzo, RecapitoTelefonico, Nome, Cognome, CodiceFiscale)
 
@@ -206,12 +208,10 @@ Tutte le relazioni rispettano la forma normale di Boyce-Codd (BCNF), di seguito 
 \item IDruolo $\rightarrow$ Qualifica, IDorganizzazione
 \end{itemize}
 
-\item \textbf{Fatture}\\È in BCNF perché IDfattura è chiave, e perché IDPratica identifica un unico cliente (persona o organizzazione), come verificabile nello schema concettuale.
+\item \textbf{Fatture}\\È in BCNF perché IDfattura è chiave.
 
 \begin{itemize}
-\item IDfattura $\rightarrow$ Importo, IDpratica, IDorganizzazioneEmittente, IDpersonaIntestataria, IDorganizzazioneIntestataria, DataEmissione
-
-\item IDpratica $\rightarrow$ IDpersonaIntestataria, IDorganizzazioneIntestataria
+\item IDfattura $\rightarrow$ Importo, IDpratica, IDorganizzazioneEmittente, DataEmissione
 \end{itemize}
 
 \item \textbf{Pagamenti}\\È in BCNF perché IDpagamento è chiave.
@@ -226,7 +226,7 @@ Tutte le relazioni rispettano la forma normale di Boyce-Codd (BCNF), di seguito 
 
 
  \subsection{ Uso di proiezione, join e restrizione }
-Stampa le persone intestatarie di fatture i cui importi sono $> 100$:
+Stampa le organizzazioni che hanno emesso fatture i cui importi sono $> 100$:
 
 \begin{minipage}{\textwidth}
 \lstinputlisting[caption=Query 1,title=Codice query 1:]{1.sql}
@@ -244,7 +244,7 @@ Stampa il totale per ogni modalità di pagamento dato dai pagamenti in cui Cifra
 
  \subsection{ Uso di join, group by con having e where }
 
-Stampa il codice fiscale delle persone intestatarie di più di 3 fatture il cui importo è $> 1000$:
+Stampa la partita IVA delle organizzazioni che hanno emesso di più di 3 fatture il cui importo è $> 1000$:
 
 \begin{minipage}{\textwidth}
 \lstinputlisting[caption=Query 3,title=Codice query 3:]{3.sql}
@@ -252,7 +252,7 @@ Stampa il codice fiscale delle persone intestatarie di più di 3 fatture il cui 
 
  \subsection{ Uso di select annidata con quantificazione esistenziale }
 
-Stampa le organizzazioni che hanno emesso almeno una fattura con un importo $> 100$:
+Stampa le organizzazioni che hanno effettuato almeno un pagamento prima dell'entrata in vigore dell'Euro:
 
 \begin{minipage}{\textwidth}
 \lstinputlisting[caption=Query 4,title=Codice query 4:]{4.sql}

@@ -1,6 +1,6 @@
 SELECT *
 FROM   Organizzazioni as O
 WHERE  EXISTS ( SELECT *
-			    FROM Fatture as F 
-			    WHERE F.Importo > 100 and
-			F.IDOrganizzazioneEmittente = O.IDOrganizzazione )
+			    FROM Pagamenti as P 
+			    WHERE P.DataPagamento < "01012002" and
+					  P.IDOrganizzazione = O.IDOrganizzazione )
