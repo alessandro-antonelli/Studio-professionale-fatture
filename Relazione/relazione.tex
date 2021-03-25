@@ -54,12 +54,14 @@
 
 %%%%%%%%%%%%%%%%%%%%%%%  FRONTESPIZIO %%%%%%%%%%%%%%%%%%%%%%%
 
-\title { \vspace{-1.0cm}{\small Università di Pisa\\Dipartimento di Informatica\\Corso di Laurea in Informatica\\[0.5cm]Corso di Basi di Dati (244AA), prof. Giorgio Ghelli\\[0.7cm]}Progetto ``Studio professionale fatture"\\Relazione finale }
+\title { \centering\includegraphics[width=3cm]{ Stemma_unipi.png }\\{\small Università di Pisa\\Dipartimento di Informatica\\Corso di Laurea in Informatica\\[0.5cm]Corso di Basi di Dati (244AA), prof. Giorgio Ghelli\\[0.7cm]}Progetto ``Studio professionale fatture"\\Relazione finale }
 \author { Candidati:\\Alessandro Antonelli\\(matricola 507264, corso A)\\Tony Agosta\\(matricola 544090, corso A)}
 \date { Consegna: 25 marzo 2021\\Appello straordinario marzo 2021\\A.A. 2019/2020 }
 
 \begin {document}
  \maketitle
+
+ \clearpage
  
  \tableofcontents
 
@@ -207,7 +209,7 @@ Tutte le relazioni rispettano la forma normale di Boyce-Codd (BCNF), di seguito 
 \item IDruolo $\rightarrow$ Qualifica, IDorganizzazione
 \end{itemize}
 
-\item \textbf{Fatture}\\È in BCNF perché IDfattura è chiave e perché a una pratica corrisponde un unico cliente (persona o organizzazione), come verificabile nello schema concettuale.
+\item \textbf{Fatture}\\È in BCNF perché IDfattura è chiave, e perché IDPratica identifica un unico cliente (persona o organizzazione), come verificabile nello schema concettuale.
 
 \begin{itemize}
 \item IDfattura $\rightarrow$ Importo, IDpratica, IDorganizzazioneEmittente, IDpersonaIntestataria, IDorganizzazioneIntestataria, DataEmissione
@@ -432,9 +434,12 @@ Stampa i pagamenti effettuati tramite bonifico il cui importo è maggiore del pa
  \captionof{figure}{Piano di accesso fisico della query 1 con indici}
 %\centerline{
 %\frame{
-\includegraphics[height=6.2cm]{ Albero fisico 1 indici.png }
+\includegraphics[height=6.2cm]{ Albero fisico indici 1.png }
 %}
 %\end{center}
+
+Si suppone di disporre di un indice sull'attributo IDPersona.
+
 \end{multicols}
 \end{minipage}
 
@@ -454,9 +459,12 @@ Stampa i pagamenti effettuati tramite bonifico il cui importo è maggiore del pa
  \captionof{figure}{Piano di accesso fisico della query 2 con indici}
 %\centerline{
 %\frame{
-\includegraphics[height=10cm]{ Albero fisico 2 indici.png }
+\includegraphics[height=10cm]{ Albero fisico indici 2.png }
 %}
 %\end{center}
+
+Si suppone di disporre di un indice sull'attributo CifraPagata.
+
 \end{multicols}
 \end{minipage}
 
@@ -476,9 +484,12 @@ Stampa i pagamenti effettuati tramite bonifico il cui importo è maggiore del pa
  \captionof{figure}{Piano di accesso fisico della query 3 con indici}
 %\centerline{
 %\frame{
-\includegraphics[height=11cm]{ Albero fisico 3 indici.png }
+\includegraphics[height=11cm]{ Albero fisico indici 3.png }
 %}
 %\end{center}
+
+Si suppone di disporre di un indice sull'attributo IDPersona.
+
 \end{multicols}
 \end{minipage}
 

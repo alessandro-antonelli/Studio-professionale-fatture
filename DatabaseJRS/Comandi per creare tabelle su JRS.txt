@@ -1,0 +1,85 @@
+CREATE TABLE Persone
+(
+   IDpersona integer NOT NULL, Denominazione varchar(255) NOT NULL, Indirizzo varchar(255) NOT NULL, RecapitoTelefonico varchar(13) NOT NULL, Nome varchar(255) NOT NULL, Cognome varchar(255) NOT NULL, CodiceFiscale varchar(16) NOT NULL,
+   PRIMARY KEY IDpersona(IDpersona)
+);
+
+CREATE TABLE Organizzazioni (
+IDOrganizzazione integer NOT NULL,
+Denominazione varchar(255),
+Indirizzo varchar(255),
+RecapitoTelefonico varchar(13),
+PartitaIV varchar(255),
+PRIMARY KEY IDOrganizzazione(IDOrganizzazione));
+
+CREATE TABLE Pratiche
+(
+   IDPratica integer NOT NULL, IDpersona integer NOT NULL, IDorganizzazione integer NOT NULL,
+   PRIMARY KEY IDPratica(IDPratica),
+   FOREIGN KEY IDpersona (IDpersona) REFERENCES Persone ON DELETE CASCADE,
+   FOREIGN KEY IDorganizzazione (IDorganizzazione) REFERENCES Organizzazioni ON DELETE CASCADE
+);
+
+CREATE TABLE Fatture
+(
+   IDfattura integer NOT NULL, IDpratica integer NOT NULL, IDorganizzazioneEmittente integer NOT NULL, IDpersonaIntestataria integer NOT NULL, IDorgIntestataria integer NOT NULL, Importo integer NOT NULL, DataEmissione varchar(8),
+   PRIMARY KEY IDfattura(IDfattura),
+   FOREIGN KEY IDpratica (IDpratica) REFERENCES Pratiche ON DELETE CASCADE,
+   FOREIGN KEY IDorganizzazioneEmittente(IDorganizzazioneEmittente) REFERENCES Organizzazioni ON DELETE CASCADE,
+   FOREIGN KEY IDpersonaIntestataria(IDpersonaIntestataria) REFERENCES Persone ON DELETE CASCADE,
+   FOREIGN KEY IDorgIntestataria(IDorgIntestataria) REFERENCES Organizzazioni ON DELETE CASCADE
+);
+
+CREATE TABLE RuoliAziendali
+(
+   IDruolo integer NOT NULL, Qualifica varchar(255) NOT NULL, IDorganizzazione integer NOT NULL,
+   PRIMARY KEY IDruolo(IDruolo),
+   FOREIGN KEY IDorganizzazione (IDorganizzazione) REFERENCES Organizzazioni ON DELETE CASCADE
+);
+
+CREATE TABLE PersoneRuoliAziendali
+(
+   IDpersona integer NOT NULL, IDruolo integer NOT NULL,
+   PRIMARY KEY ID(IDpersona, IDruolo),
+   FOREIGN KEY IDpersona(IDpersona) REFERENCES Persone ON DELETE CASCADE
+   FOREIGN KEY IDruolo(IDruolo) REFERENCES RuoliAziendali ON DELETE CASCADE
+);
+
+
+CREATE TABLE Pagamenti(
+IDPagamenti integer NOT NULL,
+IDfattura integer NOT NULL,
+IDpersona integer NOT NULL,
+IDOrganizzazione integer NOT NULL,
+Modalita varchar(255),
+CifraPagata integer,
+DataPagamento varchar(8),
+
+PRIMARY KEY IDPagamenti(IDPagamenti),
+FOREIGN KEY IDfattura(IDfattura) REFERENCES Fatture ON DELETE CASCADE,
+FOREIGN KEY IDpersona(IDpersona) REFERENCES Persone ON DELETE CASCADE,
+FOREIGN KEY IDOrganizzazione(IDOrganizzazione) REFERENCES Organizzazioni ON DELETE CASCADE));
+
+
+
+CREATE TABLE PraticheRuoliAziendali(
+IDpratica integer NOT NULL,IDruolo integer NOT NULL,
+PRIMARY KEY (IDpratica, IDruolo),
+FOREIGN KEY IDpratica(IDpratica) REFERENCES Pratiche ON DELETE CASCADE,
+FOREIGN KEY IDruolo(IDruolo) REFERENCES RuoliAziendali ON DELETE CASCADE);
+
+---------------------
+
+
+SELECT P.Nome
+FROM Persone P JOIN Fatture F ON F.IDpersonaIntestataria = P.IDpersona
+WHERE F.Importo > 100
+
+????????
+
+SELECT	 P.CodiceFiscale, COUNT(F.IDfattura) as NumeroFatture
+FROM	 Persone P JOIN Fatture F
+		 ON F.IDpersonaIntestataria = P.IDpersona
+WHERE	 F.Importo > 1000
+GROUP BY P.CodiceFiscale
+HAVING	 COUNT(F.IDfattura) > 3
