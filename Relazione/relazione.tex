@@ -252,7 +252,7 @@ Stampa la partita IVA delle organizzazioni che hanno emesso di più di 3 fatture
 
  \subsection{ Uso di select annidata con quantificazione esistenziale }
 
-Stampa le organizzazioni che hanno effettuato almeno un pagamento prima dell'entrata in vigore dell'Euro:
+Stampa le organizzazioni che hanno effettuato almeno un pagamento prima dell'entrata in vigore dell'Euro (1° gennaio 2002):
 
 \begin{minipage}{\textwidth}
 \lstinputlisting[caption=Query 4,title=Codice query 4:]{4.sql}
@@ -406,7 +406,7 @@ Piano di accesso fisico senza indici:
  \captionof{figure}[Piano di accesso fisico della query 1 con indici]{Piano di accesso fisico con indici:}
 \includegraphics[height=5.7cm]{ Albero fisico indici 1.png }
 
-Si suppone di disporre di un indice sull'attributo IDPersona.
+Si suppone di disporre di un indice sull'attributo IDorganizzazione.
 
 \end{multicols}
 \end{minipage}
@@ -449,7 +449,7 @@ Piano di accesso fisico senza indici:
  \captionof{figure}[Piano di accesso fisico della query 3 con indici]{Piano di accesso fisico con indici:}
 \includegraphics[height=11cm]{ Albero fisico indici 3.png }
 
-Si suppone di disporre di un indice sull'attributo IDPersona.
+Si suppone di disporre di un indice sull'attributo IDorganizzazione.
 
 \end{multicols}
 \end{minipage}
