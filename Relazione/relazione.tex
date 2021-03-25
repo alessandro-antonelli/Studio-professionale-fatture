@@ -2,7 +2,6 @@
 \usepackage [utf8]{inputenc}
 \usepackage [italian]{babel}
 \usepackage{graphicx}
-%\usepackage{grffile}
 \usepackage{listings}
 \usepackage{color}
 \usepackage[hidelinks]{hyperref}
@@ -30,12 +29,10 @@
     commentstyle=\color{codegreen},
     keywordstyle=\color{magenta},
     numberstyle=\small\color{codegray},
-%    xleftmargin=-10px,
     stringstyle=\color{codepurple},
     basicstyle=\ttfamily,
     breakatwhitespace=false,         
     breaklines=true,                 
-%    captionpos=b,                    
     keepspaces=true,                 
     numbers=left,                    
     numbersep=10pt,                  
@@ -54,9 +51,11 @@
 
 %%%%%%%%%%%%%%%%%%%%%%%  FRONTESPIZIO %%%%%%%%%%%%%%%%%%%%%%%
 
-\title { \centering\includegraphics[width=3cm]{ Stemma_unipi.png }\\{\small Università di Pisa\\Dipartimento di Informatica\\Corso di Laurea in Informatica\\[0.5cm]Corso di Basi di Dati (244AA), prof. Giorgio Ghelli\\[0.7cm]}Progetto ``Studio professionale fatture"\\Relazione finale }
-\author { Candidati:\\Alessandro Antonelli\\(matricola 507264, corso A)\\Tony Agosta\\(matricola 544090, corso A)}
-\date { Consegna: 25 marzo 2021\\Appello straordinario marzo 2021\\A.A. 2019/2020 }
+\title { \centering\includegraphics[width=3cm]{ Stemma_unipi.png }\\{\small Università di Pisa\\Dipartimento di Informatica\\Corso di Laurea in Informatica\\[1cm]Corso di Basi di Dati (244AA), prof. Giorgio Ghelli\\[1.5cm]}Progetto ``Studio professionale fatture"\\Relazione finale\vspace{1cm} }
+
+\author { \vspace{0.2cm}Candidati:\\Alessandro Antonelli\\\vspace{0.3cm}(matricola 507264, corso A)\\Tony Agosta\\(matricola 544090, corso A)}
+
+\date { \vspace{1cm}Consegna: 25 marzo 2021\\Appello straordinario marzo 2021\\A.A. 2019/2020 }
 
 \begin {document}
  \maketitle
@@ -103,7 +102,6 @@ Le classi individuate sono  7:
 \centering 
  \captionof{figure}{Schema concettuale a oggetti}
 \centerline{
-%\frame{
 \includegraphics[width=\textwidth]{ Schema concettuale a oggetti.png }
 }
 \end{center}
@@ -111,7 +109,7 @@ Le classi individuate sono  7:
 
  \subsection{ Vincoli }
 
-\subsection{ Vincoli intrarelazionali }
+\subsubsection{ Vincoli intrarelazionali }
 
 \begin{itemize}
 \item Tutti gli attributi (comprese le chiavi esterne) hanno il vincolo NOT NULL.
@@ -127,7 +125,7 @@ Le classi individuate sono  7:
 \item Il \textit{RecapitoTelefonico} di un \textit{Cliente} non può essere lungo meno di 9 caratteri.
 \end{itemize}
 
-\subsection{ Vincoli interrelazionali }
+\subsubsection{ Vincoli interrelazionali }
 
 \begin{itemize}
 \item La \textit{CifraPagata} di un \textit{Pagamento} deve essere $\leq$ dell'\textit{Importo} della \textit{Fattura} a cui si riferisce.
@@ -149,7 +147,6 @@ Le classi individuate sono  7:
 \centering 
  \captionof{figure}{Schema logico relazionale}
 \centerline{
-%\frame{
 \includegraphics[width=\textwidth -4cm]{ Schema logico relazionale.png }
 }
 \end{center}
@@ -232,7 +229,7 @@ Tutte le relazioni rispettano la forma normale di Boyce-Codd (BCNF), di seguito 
 Stampa le persone intestatarie di fatture i cui importi sono $> 100$:
 
 \begin{minipage}{\textwidth}
-\lstinputlisting[caption=Query 1]{1.sql}
+\lstinputlisting[caption=Query 1,title=Codice query 1:]{1.sql}
 \end{minipage}
 
 
@@ -241,7 +238,7 @@ Stampa le persone intestatarie di fatture i cui importi sono $> 100$:
 Stampa il totale per ogni modalità di pagamento dato dai pagamenti in cui CifraPagata $> 10$ e $< 10000$, e ordinate in base al totale:
 
 \begin{minipage}{\textwidth}
-\lstinputlisting[caption=Query 2]{2.sql}
+\lstinputlisting[caption=Query 2,title=Codice query 2:]{2.sql}
 \end{minipage}
 
 
@@ -250,7 +247,7 @@ Stampa il totale per ogni modalità di pagamento dato dai pagamenti in cui Cifra
 Stampa il codice fiscale delle persone intestatarie di più di 3 fatture il cui importo è $> 1000$:
 
 \begin{minipage}{\textwidth}
-\lstinputlisting[caption=Query 3]{3.sql}
+\lstinputlisting[caption=Query 3,title=Codice query 3:]{3.sql}
 \end{minipage}
 
  \subsection{ Uso di select annidata con quantificazione esistenziale }
@@ -258,7 +255,7 @@ Stampa il codice fiscale delle persone intestatarie di più di 3 fatture il cui 
 Stampa le organizzazioni che hanno emesso almeno una fattura con un importo $> 100$:
 
 \begin{minipage}{\textwidth}
-\lstinputlisting[caption=Query 4]{4.sql}
+\lstinputlisting[caption=Query 4,title=Codice query 4:]{4.sql}
 \end{minipage}
 
  \subsection{ Uso di select annidata con quantificazione universale }
@@ -266,7 +263,7 @@ Stampa le organizzazioni che hanno emesso almeno una fattura con un importo $> 1
 Stampa le fatture che non sono state pagate in contanti:
 
 \begin{minipage}{\textwidth}
-\lstinputlisting[caption=Query 5]{5.sql}
+\lstinputlisting[caption=Query 5,title=Codice query 5:]{5.sql}
 \end{minipage}
 
  \subsection{ Uso di subquery di confronto quantificato usando una subquery }
@@ -274,11 +271,12 @@ Stampa le fatture che non sono state pagate in contanti:
 Stampa i pagamenti effettuati tramite bonifico il cui importo è maggiore del pagamento massimo effettuato tramite assegno:
 
 \begin{minipage}{\textwidth}
-\lstinputlisting[caption=Query 6]{6.sql}
+\lstinputlisting[caption=Query 6,title=Codice query 6:]{6.sql}
 \end{minipage}
 
  \section{ Piani di accesso }
 
+                    %%%%%%%%%%
  \subsection{ Piani di accesso logico }
 
  \subsubsection{ Query 1) }
@@ -287,19 +285,13 @@ Stampa i pagamenti effettuati tramite bonifico il cui importo è maggiore del pa
 \begin{multicols}{2}
 
 \null \vfill
-\lstinputlisting[basicstyle=\footnotesize,nolol]{1.sql}
+\lstinputlisting[basicstyle=\footnotesize,nolol,title=Codice query:]{1.sql}
 \vfill \null
 
 \columnbreak
 
-%\begin{center}
-%\raggedleft
- \captionof{figure}{Piano di accesso logico della query 1}
-%\centerline{
-%\frame{
+ \captionof{figure}[Piano di accesso logico della query 1]{Piano di accesso logico:}
 \includegraphics[height=7cm]{ Albero logico 1.png }
-%}
-%\end{center}
 
 \end{multicols}
 \end{minipage}
@@ -310,19 +302,13 @@ Stampa i pagamenti effettuati tramite bonifico il cui importo è maggiore del pa
 \begin{multicols}{2}
 
 \null \vfill
-\lstinputlisting[basicstyle=\footnotesize,nolol]{2.sql}
+\lstinputlisting[basicstyle=\footnotesize,nolol,title=Codice query:]{2.sql}
 \vfill \null
 
 \columnbreak
 
-%\begin{center}
-%\centering 
- \captionof{figure}{Piano di accesso logico della query 2}
-%\centerline{
-%\frame{
+ \captionof{figure}[Piano di accesso logico della query 2]{Piano di accesso logico:}
 \includegraphics[height=10cm]{ Albero logico 2.png }
-%}
-%\end{center}
 \end{multicols}
 \end{minipage}
 
@@ -332,111 +318,93 @@ Stampa i pagamenti effettuati tramite bonifico il cui importo è maggiore del pa
 \begin{multicols}{2}
 
 \null \vfill
-\lstinputlisting[basicstyle=\footnotesize,nolol]{3.sql}
+\lstinputlisting[basicstyle=\footnotesize,nolol,title=Codice query:]{3.sql}
 \vfill \null
 
 \columnbreak
 
-%\begin{center}
-%\centering 
- \captionof{figure}{Piano di accesso logico della query 3}
-%\centerline{
-%\frame{
+ \captionof{figure}[Piano di accesso logico della query 3]{Piano di accesso logico:}
 \includegraphics[height=10cm]{ Albero logico 3.png }
-%}
-%\end{center}
 \end{multicols}
 \end{minipage}
 
+                    %%%%%%%%%%%%%%%%%%
  \subsection{ Piani di accesso fisico senza uso di indici }
 
  \subsubsection{ Query 1) }
 
+\vspace{-0.3cm}\hspace{-0.7cm}
 \begin{minipage}{\textwidth}
 \begin{multicols}{2}
 
 \null \vfill
-\includegraphics[height=5cm]{ Albero logico 1.png }
+Piano di accesso logico:
+
+\vspace{0.3cm}\includegraphics[height=7.5cm]{ Albero logico 1.png }
 \vfill \null
 
 \columnbreak
 
-%\begin{center}
-%\centering 
- \captionof{figure}{Piano di accesso fisico della query 1 senza indici}
-%\centerline{
-%\frame{
+ \captionof{figure}[Piano di accesso fisico della query 1 senza indici]{Piano di accesso fisico senza indici:}
 \includegraphics[height=7.5cm]{ Albero fisico 1.png }
-%}
-%\end{center}
 \end{multicols}
 \end{minipage}
 
  \subsubsection{ Query 2) }
 
-\begin{minipage}{\textwidth}
+\vspace{-0.3cm}\begin{minipage}{\textwidth}
 \begin{multicols}{2}
 
 \null \vfill
-\includegraphics[height=6cm]{ Albero logico 2.png }
+Piano di accesso logico:
+
+\vspace{0.3cm}\includegraphics[height=9.5cm]{ Albero logico 2.png }
 \vfill \null
 
 \columnbreak
 
-%\begin{center}
-%\centering 
- \captionof{figure}{Piano di accesso fisico della query 2 senza indici}
-%\centerline{
-%\frame{
+ \captionof{figure}[Piano di accesso fisico della query 2 senza indici]{Piano di accesso fisico senza indici:}
 \includegraphics[height=10cm]{ Albero fisico 2.png }
-%}
-%\end{center}
 \end{multicols}
 \end{minipage}
 
  \subsubsection{ Query 3) }
 
-\begin{minipage}{\textwidth}
+\vspace{-0.3cm}\begin{minipage}{\textwidth}
 \begin{multicols}{2}
 
 \null \vfill
-\includegraphics[height=5cm]{ Albero logico 3.png }
+Piano di accesso logico:
+
+\vspace{0.3cm}\includegraphics[height=10cm]{ Albero logico 3.png }
 \vfill \null
 
 \columnbreak
 
-%\begin{center}
-%\centering 
- \captionof{figure}{Piano di accesso fisico della query 3 senza indici}
-%\centerline{
-%\frame{
+ \captionof{figure}[Piano di accesso fisico della query 3 senza indici]{Piano di accesso fisico senza indici:}
 \includegraphics[height=10cm]{ Albero fisico 3.png }
-%}
-%\end{center}
 \end{multicols}
 \end{minipage}
 
+                    %%%%%%%%%%%%%%%%%
  \subsection{ Piani di accesso fisico con uso di indici }
 
  \subsubsection{ Query 1) }
 
+\vspace{-0.3cm}\hspace{-0.7cm}
 \begin{minipage}{\textwidth}
 \begin{multicols}{2}
 
 \null \vfill
-\includegraphics[height=5cm]{ Albero fisico 1.png }
+Piano di accesso fisico senza indici:
+
+\vspace{0.3cm}\includegraphics[height=5.7cm]{ Albero fisico 1.png }
 \vfill \null
 
 \columnbreak
 
-%\begin{center}
-%\centering 
- \captionof{figure}{Piano di accesso fisico della query 1 con indici}
-%\centerline{
-%\frame{
-\includegraphics[height=6.2cm]{ Albero fisico indici 1.png }
-%}
-%\end{center}
+ \captionof{figure}[Piano di accesso fisico della query 1 con indici]{Piano di accesso fisico con indici:}
+\includegraphics[height=5.7cm]{ Albero fisico indici 1.png }
 
 Si suppone di disporre di un indice sull'attributo IDPersona.
 
@@ -445,23 +413,19 @@ Si suppone di disporre di un indice sull'attributo IDPersona.
 
  \subsubsection{ Query 2) }
 
-\begin{minipage}{\textwidth}
+\vspace{-0.3cm}\begin{minipage}{\textwidth}
 \begin{multicols}{2}
 
 \null \vfill
-\includegraphics[height=6.5cm]{ Albero fisico 2.png }
+Piano di accesso fisico senza indici:
+
+\vspace{0.3cm}\includegraphics[height=10cm]{ Albero fisico 2.png }
 \vfill \null
 
 \columnbreak
 
-%\begin{center}
-%\centering 
- \captionof{figure}{Piano di accesso fisico della query 2 con indici}
-%\centerline{
-%\frame{
-\includegraphics[height=10cm]{ Albero fisico indici 2.png }
-%}
-%\end{center}
+ \captionof{figure}[Piano di accesso fisico della query 2 con indici]{Piano di accesso fisico con indici:}
+\includegraphics[height=10.5cm]{ Albero fisico indici 2.png }
 
 Si suppone di disporre di un indice sull'attributo CifraPagata.
 
@@ -470,23 +434,20 @@ Si suppone di disporre di un indice sull'attributo CifraPagata.
 
  \subsubsection{ Query 3) }
 
+\vspace{-0.3cm}\hspace{-1cm}
 \begin{minipage}{\textwidth}
 \begin{multicols}{2}
 
 \null \vfill
-\includegraphics[height=6.5cm]{ Albero fisico 3.png }
+Piano di accesso fisico senza indici:
+
+\vspace{0.3cm}\includegraphics[height=9.5cm]{ Albero fisico 3.png }
 \vfill \null
 
 \columnbreak
 
-%\begin{center}
-%\centering 
- \captionof{figure}{Piano di accesso fisico della query 3 con indici}
-%\centerline{
-%\frame{
+ \captionof{figure}[Piano di accesso fisico della query 3 con indici]{Piano di accesso fisico con indici:}
 \includegraphics[height=11cm]{ Albero fisico indici 3.png }
-%}
-%\end{center}
 
 Si suppone di disporre di un indice sull'attributo IDPersona.
 
