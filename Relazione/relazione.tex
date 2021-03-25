@@ -8,6 +8,7 @@
 \usepackage[hidelinks]{hyperref}
 \usepackage{calc}
 \usepackage{caption}
+\usepackage{multicol}
 
 \addtolength{\oddsidemargin}{-40pt}
 \addtolength{\textwidth}{80pt}
@@ -175,38 +176,38 @@ Le classi individuate sono  7:
 
  \subsection{ Dipendenze funzionali }
 
-Tutte le relazioni rispettano la forma normale di Boyce-Codd (BCNF), di seguito si riportano le dipendenze funzionali:
+Tutte le relazioni rispettano la forma normale di Boyce-Codd (BCNF), di seguito si riportano le dipendenze funzionali di ciascuna:
 
 \begin{itemize}
-\item Pratiche\\È in BCNF perché IDpratica è chiave.
+\item \textbf{Pratiche}\\È in BCNF perché IDpratica è chiave.
 \begin{itemize}
 \item IDpratica $\rightarrow$ IDpersona, IDorganizzazione
 \end{itemize}
 
-\item Organizzazioni\\È in BCNF perché IDorganizzazione è chiave, e PartitaIVA e RecapitoTelefonico, identificando una singola organizzazione, sono chiavi.
+\item \textbf{Organizzazioni}\\È in BCNF perché IDorganizzazione è chiave, e PartitaIVA e RecapitoTelefonico, identificando una singola organizzazione, sono chiavi.
 \begin{itemize}
 \item IDorganizzazione $\rightarrow$ Denominazione, Indirizzo, RecapitoTelefonico, PartitaIVA
 \item PartitaIVA $\rightarrow$ Denominazione, Indirizzo, RecapitoTelefonico, IDorganizzazione
 \item RecapitoTelefonico $\rightarrow$ Denominazione, Indirizzo, PartitaIVA, IDorganizzazione
 \end{itemize}
 
-\item Persone\\È in BCNF perché IDpersona è chiave, e CodiceFiscale e RecapitoTelefonico, identificando una singola persona, sono chiavi.
+\item \textbf{Persone}\\È in BCNF perché IDpersona è chiave, e CodiceFiscale e RecapitoTelefonico, identificando una singola persona, sono chiavi.
 \begin{itemize}
 \item IDpersona $\rightarrow$ Denominazione, Indirizzo, RecapitoTelefonico, Nome, Cognome, CodiceFiscale
 \item CodiceFiscale $\rightarrow$ Denominazione, Indirizzo, RecapitoTelefonico, Nome, Cognome, IDpersona
 \item RecapitoTelefonico $\rightarrow$ Denominazione, Indirizzo, Nome, Cognome, CodiceFiscale, IDpersona
 \end{itemize}
 
-\item PersoneRuoliAziendali è in BCNF perché non ha dipendenze non banali
+\item \textbf{PersoneRuoliAziendali} è in BCNF perché non ha dipendenze non banali.
 
-\item PraticheRuoliAziendali è in BCNF perché non ha dipendenze non banali
+\item \textbf{PraticheRuoliAziendali} è in BCNF perché non ha dipendenze non banali.
 
-\item RuoliAziendali\\È in BCNF perché IDruolo è chiave
+\item \textbf{RuoliAziendali}\\È in BCNF perché IDruolo è chiave.
 \begin{itemize}
 \item IDruolo $\rightarrow$ Qualifica, IDorganizzazione
 \end{itemize}
 
-\item Fatture\\È in BCNF perché IDfattura è chiave e perché a una pratica corrisponde un unico cliente (persona o organizzazione), come verificabile nello schema concettuale.
+\item \textbf{Fatture}\\È in BCNF perché IDfattura è chiave e perché a una pratica corrisponde un unico cliente (persona o organizzazione), come verificabile nello schema concettuale.
 
 \begin{itemize}
 \item IDfattura $\rightarrow$ Importo, IDpratica, IDorganizzazioneEmittente, IDpersonaIntestataria, IDorganizzazioneIntestataria, DataEmissione
@@ -214,7 +215,7 @@ Tutte le relazioni rispettano la forma normale di Boyce-Codd (BCNF), di seguito 
 \item IDpratica $\rightarrow$ IDpersonaIntestataria, IDorganizzazioneIntestataria
 \end{itemize}
 
-\item Pagamenti\\È in BCNF perché IDpagamento è chiave
+\item \textbf{Pagamenti}\\È in BCNF perché IDpagamento è chiave.
 
 \begin{itemize}
 \item IDpagamento $\rightarrow$ Modalità, CifraPagata, IDfattura, IDpersona, IDorganizzazione, DataPagamento
@@ -281,40 +282,68 @@ Stampa i pagamenti effettuati tramite bonifico il cui importo è maggiore del pa
  \subsubsection{ Query 1) }
 
 \begin{minipage}{\textwidth}
-\begin{center}
-\centering 
+\begin{multicols}{2}
+
+\null \vfill
+\lstinputlisting[basicstyle=\footnotesize,nolol]{1.sql}
+\vfill \null
+
+\columnbreak
+
+%\begin{center}
+%\raggedleft
  \captionof{figure}{Piano di accesso logico della query 1}
-\centerline{
+%\centerline{
 %\frame{
-\includegraphics[height=\textheight / 3]{ Albero logico 1.png }
-}
-\end{center}
+\includegraphics[height=7cm]{ Albero logico 1.png }
+%}
+%\end{center}
+
+\end{multicols}
 \end{minipage}
 
  \subsubsection{ Query 2) }
 
 \begin{minipage}{\textwidth}
-\begin{center}
-\centering 
+\begin{multicols}{2}
+
+\null \vfill
+\lstinputlisting[basicstyle=\footnotesize,nolol]{2.sql}
+\vfill \null
+
+\columnbreak
+
+%\begin{center}
+%\centering 
  \captionof{figure}{Piano di accesso logico della query 2}
-\centerline{
+%\centerline{
 %\frame{
-\includegraphics[height=\textheight / 3]{ Albero logico 2.png }
-}
-\end{center}
+\includegraphics[height=10cm]{ Albero logico 2.png }
+%}
+%\end{center}
+\end{multicols}
 \end{minipage}
 
  \subsubsection{ Query 3) }
 
 \begin{minipage}{\textwidth}
-\begin{center}
-\centering 
+\begin{multicols}{2}
+
+\null \vfill
+\lstinputlisting[basicstyle=\footnotesize,nolol]{3.sql}
+\vfill \null
+
+\columnbreak
+
+%\begin{center}
+%\centering 
  \captionof{figure}{Piano di accesso logico della query 3}
-\centerline{
+%\centerline{
 %\frame{
-\includegraphics[height=\textheight / 3]{ Albero logico 3.png }
-}
-\end{center}
+\includegraphics[height=10cm]{ Albero logico 3.png }
+%}
+%\end{center}
+\end{multicols}
 \end{minipage}
 
  \subsection{ Piani di accesso fisico senza uso di indici }
@@ -322,40 +351,67 @@ Stampa i pagamenti effettuati tramite bonifico il cui importo è maggiore del pa
  \subsubsection{ Query 1) }
 
 \begin{minipage}{\textwidth}
-\begin{center}
-\centering 
+\begin{multicols}{2}
+
+\null \vfill
+\includegraphics[height=5cm]{ Albero logico 1.png }
+\vfill \null
+
+\columnbreak
+
+%\begin{center}
+%\centering 
  \captionof{figure}{Piano di accesso fisico della query 1 senza indici}
-\centerline{
+%\centerline{
 %\frame{
-\includegraphics[height=\textheight / 3]{ Albero fisico 1.png }
-}
-\end{center}
+\includegraphics[height=7.5cm]{ Albero fisico 1.png }
+%}
+%\end{center}
+\end{multicols}
 \end{minipage}
 
  \subsubsection{ Query 2) }
 
 \begin{minipage}{\textwidth}
-\begin{center}
-\centering 
+\begin{multicols}{2}
+
+\null \vfill
+\includegraphics[height=6cm]{ Albero logico 2.png }
+\vfill \null
+
+\columnbreak
+
+%\begin{center}
+%\centering 
  \captionof{figure}{Piano di accesso fisico della query 2 senza indici}
-\centerline{
+%\centerline{
 %\frame{
-\includegraphics[height=\textheight / 3]{ Albero fisico 2.png }
-}
-\end{center}
+\includegraphics[height=10cm]{ Albero fisico 2.png }
+%}
+%\end{center}
+\end{multicols}
 \end{minipage}
 
  \subsubsection{ Query 3) }
 
 \begin{minipage}{\textwidth}
-\begin{center}
-\centering 
+\begin{multicols}{2}
+
+\null \vfill
+\includegraphics[height=5cm]{ Albero logico 3.png }
+\vfill \null
+
+\columnbreak
+
+%\begin{center}
+%\centering 
  \captionof{figure}{Piano di accesso fisico della query 3 senza indici}
-\centerline{
+%\centerline{
 %\frame{
-\includegraphics[height=\textheight / 3]{ Albero fisico 3.png }
-}
-\end{center}
+\includegraphics[height=10cm]{ Albero fisico 3.png }
+%}
+%\end{center}
+\end{multicols}
 \end{minipage}
 
  \subsection{ Piani di accesso fisico con uso di indici }
@@ -363,40 +419,67 @@ Stampa i pagamenti effettuati tramite bonifico il cui importo è maggiore del pa
  \subsubsection{ Query 1) }
 
 \begin{minipage}{\textwidth}
-\begin{center}
-\centering 
+\begin{multicols}{2}
+
+\null \vfill
+\includegraphics[height=5cm]{ Albero fisico 1.png }
+\vfill \null
+
+\columnbreak
+
+%\begin{center}
+%\centering 
  \captionof{figure}{Piano di accesso fisico della query 1 con indici}
-\centerline{
+%\centerline{
 %\frame{
-\includegraphics[height=\textheight / 3]{ Albero fisico 1 indici.png }
-}
-\end{center}
+\includegraphics[height=6.2cm]{ Albero fisico 1 indici.png }
+%}
+%\end{center}
+\end{multicols}
 \end{minipage}
 
  \subsubsection{ Query 2) }
 
 \begin{minipage}{\textwidth}
-\begin{center}
-\centering 
+\begin{multicols}{2}
+
+\null \vfill
+\includegraphics[height=6.5cm]{ Albero fisico 2.png }
+\vfill \null
+
+\columnbreak
+
+%\begin{center}
+%\centering 
  \captionof{figure}{Piano di accesso fisico della query 2 con indici}
-\centerline{
+%\centerline{
 %\frame{
-\includegraphics[height=\textheight / 3]{ Albero fisico 2 indici.png }
-}
-\end{center}
+\includegraphics[height=10cm]{ Albero fisico 2 indici.png }
+%}
+%\end{center}
+\end{multicols}
 \end{minipage}
 
  \subsubsection{ Query 3) }
 
 \begin{minipage}{\textwidth}
-\begin{center}
-\centering 
+\begin{multicols}{2}
+
+\null \vfill
+\includegraphics[height=6.5cm]{ Albero fisico 3.png }
+\vfill \null
+
+\columnbreak
+
+%\begin{center}
+%\centering 
  \captionof{figure}{Piano di accesso fisico della query 3 con indici}
-\centerline{
+%\centerline{
 %\frame{
-\includegraphics[height=\textheight / 3]{ Albero fisico 3 indici.png }
-}
-\end{center}
+\includegraphics[height=11cm]{ Albero fisico 3 indici.png }
+%}
+%\end{center}
+\end{multicols}
 \end{minipage}
 
 \end{document}
