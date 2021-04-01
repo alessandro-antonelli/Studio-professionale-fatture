@@ -3,4 +3,4 @@ Lavoro di modellazione, progettazione concettuale/logica/fisica (con formalismi 
 - [Requisiti richiesti](Specifica%20ITA.pdf)
 - [Elaborato prodotto](Relazione/relazione.pdf)
 
-Realizzato da @alessandro-antonelli e @TonyAgosta come progetto finale dell'[esame di Basi di Dati dell'anno 2019/20](https://elearning.di.unipi.it/course/view.php?id=181), tenuto dal professor Giorgio Ghelli, nel corso di laurea triennale in Informatica dell'Università di Pisa.
+Realizzato da @alessandro-antonelli e @TonyAgosta come progetto finale dell'[esame di Basi di Dati dell'anno 2019/20](https://elearning.di.unipi.it/course/view.php?id=181), tenuto dal professor Giorgio Ghelli, nel corso di laurea triennale in Informatica dell'Università di Pisa. Valutato dal docente con il giudizio "molto buono" e il voto finale (dopo la prova orale) di 28/30.
